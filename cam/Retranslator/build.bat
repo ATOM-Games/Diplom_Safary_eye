@@ -1,0 +1,1 @@
+..\py\python.exe -m PyInstaller retranslator.py --add-data "web;web" --add-data "db;db"
