@@ -1,0 +1,4 @@
+[console_scripts]
+make_cv = yaml_cv_py.make_cv:main
+text2yaml = yaml_cv_py.text2yaml:main
+
