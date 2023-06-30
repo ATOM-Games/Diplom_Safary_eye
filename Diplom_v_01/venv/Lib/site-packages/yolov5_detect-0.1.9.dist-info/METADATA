@@ -1,0 +1,26 @@
+Metadata-Version: 2.1
+Name: yolov5-detect
+Version: 0.1.9
+Summary: simple yolov5 wrapper for detect(onnx, dnn)
+Home-page: https://github.com/2432001677/yolov5-detect
+Author: Bruce Yu
+Author-email: 2432001677@qq.com
+License: GPLv3+
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+License-File: LICENSE
+
+# YOLOv5 detect
+
+🚀simple yolov5 wrapper for detect(onnx, dnn)  
+
+## Installation  
+```bash
+pip install yolov5-detect
+```
+
+
