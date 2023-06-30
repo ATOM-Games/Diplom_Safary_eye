@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Ретранслятор</title>
+
+        {% include "common/html/css_links.html" %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='templates/admin/admin.css') }}"/>
+
+    </head>
+
+    <body style="min-width: fit-content">
+        {% include "common/html/header.html" %}
+
+        <div class="container p-5 w_no_max">
+            <div class="row p-0 m-0">
+                <div class="col-12 col-lg-7 col-xl-5 p-0 me-5">
+                    <div id="display_box" class="mb-5 p-3 shadow_1">
+                        <h4 class="mb-3 text-center text-light">Изображение</h4>
+                        <div class="mb-3">
+                            <img id="display" src="{{ url_for('static', filename='common/img/no_image.jpg') }}">
+                        </div>
+                        <div class="row p-0 m-0">
+                            <div class="col p-0 d-flex">
+                                <button id="enable_display_btn" class="btn btn-dark btn_no_focus" onclick="enable_display()">Включить</button>
+                                <button id="disable_display_btn" class="btn btn-dark btn_no_focus ms-auto" onclick="disable_display()" disabled>Выключить</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="manage_box" class="mb-5 p-3 shadow_1">
+                        <h4 class="mb-3 text-center">Управление</h4>
+                        <div class="row p-0 m-0">
+                            <h4 class="mb-2 p-0">Адрес: <span id="span_address">{{address}}</span></h4>
+                            <h4 class="mb-2 p-0"><span id="span_req_info" class="link" onclick="show_req_info()">Памятка</span></h4>
+                            <h4 class="mb-3 p-0">Захват изображения: <span id="span_status">
+                                {% if started %}
+                                запущен
+                                {% else %}
+                                выключен
+                                {% endif %}
+                            </span></h4>
+                            <div class="row p-0 m-0">
+                                <div class="col p-0 d-flex">
+                                    <button id="start_btn" class="btn btn-outline-dark btn_no_focus" onclick="request_start()"  {% if started %}disabled{% endif %}>Запустить</button>
+                                    <button id="refresh_btn" class="btn btn-outline-dark btn_no_focus ms-auto" onclick="request_refresh()" {% if started %}disabled{% endif %}>Обновить конфигурацию</button>
+                                    <button id="stop_btn" class="btn btn-outline-dark btn_no_focus ms-auto" onclick="request_stop()" {% if not started %}disabled{% endif %}>Остановить</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg p-0">
+                    <div id="config_box" class="mb-5 p-3 shadow_1">
+                        <h4 class="mb-3 text-center">Конфигурация</h4>
+                        <div class="row p-0 m-0">
+                            <h4 class="mb-3 p-0">Адрес хоста: <span class="link param" onclick="set_host()" data-param_name="host">{{ cfg.host }}</span></h4>
+                            <h4 class="mb-3 p-0">Порт хоста: <span class="link param" onclick="set_port()" data-param_name="port">{{ cfg.port }}</span></h4>
+                            <h4 class="mb-3 p-0">Частота чтения кадров: <span class="link param" onclick="set_fps()" data-param_name="fps">{{ cfg.fps }}</span></h4>
+                            <h4 class="mb-3 p-0">Источник изображения: <span class="link param" onclick="set_mode()" data-param_name="mode" data-param_value="{{ cfg.mode }}">
+                                {% if cfg.mode == 'device' %}
+                                подключенная камера
+                                {% elif cfg.mode == 'screen' %}
+                                экран монитора
+                                {% elif cfg.mode == 'ip-camera' %}
+                                IP-камера
+                                {% endif %}
+                            </span></h4>
+                            <div id="mode_variable" class="p-0">
+                                <h4 class="mb-3 p-0 {% if cfg.mode != 'device' %}d-none{% endif %}" >
+                                    Идентификатор устройства: <span class="link param" onclick="set_device_id()" data-param_name="device_id">{{ cfg.device_id }}</span>
+                                </h4>
+                                <h4 class="mb-3 p-0 {% if cfg.mode != 'ip-camera' %}d-none{% endif %}">
+                                    Адрес IP-камеры: <span class="link param" onclick="set_ip_camera_address()" data-param_name="ip_camera_address">{{ cfg.ip_camera_address }}</span>
+                                </h4>
+                            </div>
+                        </div>
+                        <div class="row p-0 m-0">
+                            <div class="col p-0 d-flex">
+                                <button id="save_cfg_btn" class="btn btn-outline-dark btn_no_focus" onclick="request_save_cfg()">Сохранить конфигурацию</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+
+    {% include "common/html/js_scripts.html" %}
+    <script>
+        var address = "{{address}}"
+    </script>
+    <script type="text/javascript" src="{{ url_for('static', filename='templates/admin/admin.js') }}"></script>
+
+</html>

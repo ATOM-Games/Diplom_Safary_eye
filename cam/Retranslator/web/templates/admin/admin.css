@@ -1,0 +1,38 @@
+
+#display{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-style: groove;
+}
+
+#display_box{
+    background-color: #606060;
+}
+
+#manage_box{
+}
+
+.w70px{
+    width: 70px;
+}
+
+.lamp{
+    padding-left: 3px;
+    padding-top: 3px;
+    width: 30px;
+    height: 30px;
+}
+
+.lamp div{
+    width: 24px;
+    height: 24px;
+}
+
+.d_t_none{
+    display: none;
+}
+
+.mt-1p{
+    margin-top:1px;
+}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Админка</title>
+
+        <link rel="stylesheet" href="{{ url_for('static', filename='common/css/bootstrap.min.css') }}"/>
+        <link rel="stylesheet" href="{{ url_for('static', filename='common/css/common_styles.css') }}"/>
+
+    </head>
+
+
+    <body style="min-width: fit-content">
+
+        {% include "common/html/header.html" %}
+
+        <div class="container float-left p-5">
+            <div class="row">
+                <div class="col-6">
+                    <div class="row p-0 m-0">
+                        <div class="mr-xl-5 mb-5 mb-xl-0">
+                            <img id="display" src="/get_frame">
+                        </div>
+                    </div>
+                    <div class="row p-0 m-0">
+                        <button id="enable_btn" class="btn btn-primary" onclick="enable()">Включить</button>
+                        <button id="disable_btn" class="btn btn-primary" onclick="disable()" disabled>Выключить</button>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <h4>Найдено лиц: <span id="faces_ctr">0</span></h4>
+                    <h4>Список эмоций: <span id="emos_list">-</span></h4>
+                    <h4>Ахтунг: <span id="ahtung">нет</span></h4>
+                </div>
+            </div>
+        </div>
+    </body>
+
+
+    <script src="{{ url_for('static', filename='common/js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='common/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='common/js/sweetalert.min.js') }}"></script>
+
+    <script>
+        function gg(){
+            $.post('get_b64_frame', function(data){
+                $("#display")[0].src = "data:image/jpeg;base64," + data
+            })
+
+        }
+    </script>
+
+</html>

@@ -1,0 +1,127 @@
+
+.link{
+    color: darkblue;
+}
+.link:hover{
+    cursor: pointer;
+    color: blue;
+    text-decoration: underline;
+}
+
+.w_fit_content{
+    width: fit-content;
+}
+
+.w_no_max{
+    max-width: none;
+}
+
+.shadow_1{
+    box-shadow: 1px 1px 5px 2px;
+}
+
+.input_gray:focus{
+    border: 1px solid #6c6c6c;
+    box-shadow: 0 0 1px 2px lightgray;
+}
+
+.btn-dark:focus{
+    box-shadow: 0 0 1px 2px lightgray;
+}
+
+
+.input_dark:focus{
+    border: 1px solid #343a40;
+    box-shadow: 0 0 1px 2px lightgray;
+    color: black;
+}
+
+.btn_no_focus:focus{
+    outline: none;
+    box-shadow: none;
+}
+
+.input_font_bolder{
+    font-size: 1.2em;
+    font-weight: 500;
+    color: black;
+}
+.input-group-text{
+    background: lightgray;
+}
+
+
+.swal_width_fit_content{
+    width: fit-content;
+}
+
+.swal-button{
+    padding: 10px 25px;
+    border-radius: 4px;
+    background: None;
+    color: #343a40;
+    font-size: 14px;
+    border: 1px solid #343a40;
+    text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3);
+}
+.swal-button:hover{
+    background: #343a40 !important;
+    color: white;
+}
+.swal-button:focus{
+    box-shadow: 0 0 1px 2px lightgray;
+}
+
+.swal-button--confirm{
+    padding: 10px 25px;
+    border-radius: 4px;
+    background: None;
+    color: #343a40;
+    font-size: 14px;
+    border: 1px solid #343a40;
+    text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3);
+}
+.swal-button--confirm:hover{
+    background: #343a40 !important;
+    color: white;
+}
+.swal-button--confirm:focus{
+    box-shadow: 0 0 1px 2px lightgray;
+}
+
+.swal-button--cancel{
+    padding: 10px 25px;
+    border-radius: 4px;
+    background: None;
+    color: #343a40;
+    font-size: 14px;
+    border: 1px solid #343a40;
+    text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3);
+}
+.swal-button--cancel:hover{
+    background: #343a40 !important;
+    color: white;
+}
+.swal-button--cancel:focus{
+    box-shadow: 0 0 1px 2px lightgray;
+}
+
+.swal-modal {
+    box-shadow: 0 0 20px 1px black;
+    will-change: auto!important;
+}
+
+.swal-title, .swal-text{
+    color: #343a40;
+}
+
+.swal-text{
+    font-size: large;
+    font-family: cursive;
+}
+
+.swal-content__input:focus{
+    border: 1px solid #343a40;
+    box-shadow: 0 0 1px 2px lightgray;
+    color: black;
+}
