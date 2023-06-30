@@ -1,0 +1,68 @@
+Metadata-Version: 2.1
+Name: yaml-cv-py
+Version: 1.0.0
+Summary: YAMLによる履歴書作成スクリプト
+Home-page: https://github.com/toritamantaro/yaml_cv_py
+Author: toritamantaro
+License: MIT
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3.8
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Requires-Dist: PyYAML (==5.4.1)
+Requires-Dist: reportlab (==3.5.59)
+
+# `make_cv`: Generate Japanese Resume from YAML
+
+[![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE)
+
+- [kaityo256/yaml_cv](https://github.com/kaityo256/yaml_cv) implemented in Python
+- forked from [toritamantaro/yaml_cv_py](https://github.com/toritamantaro/yaml_cv_py)
+
+## Install
+
+```bash
+# from pypi
+$ pip install yaml_cv_py
+# from source
+$ git clone https://github.com/eggplants/yaml_cv_py && yaml_cv_py
+$ pip install -e .
+```
+
+## How to use
+
+```bash
+$ make_cv -h
+```
+
+```text
+usage: make_cv [-h] [-i INPUT] [-s STYLE] [-o OUTPUT] [-V]
+
+Generate japanese resume from yaml file.
+
+optional arguments:
+  -h, --help     show this help message and exit
+  -i INPUT       set input file path. (default: data.yaml)
+  -s STYLE       set style file path. (default: style.yaml)
+  -o OUTPUT      set output file path. (default: output.pdf)
+  -V, --version  show program's version number and exit
+```
+
+```bash
+$ make_cv -i data.yaml -s style.txt -o output.pdf
+```
+
+- Result:
+
+![output_01.png](img/output_01.png)
+![output_02.png](img/output_02.png)
+
+## Thanks
+
+- [kaityo256](https://github.com/kaityo256)
+  - Author of [yaml_cv](https://github.com/kaityo256/yaml_cv)
+
+- [toritamantaro](https://github.com/toritamantaro)
+  - Original author of [yaml_cv_py](https://github.com/toritamantaro/yaml_cv_py)
+
+
