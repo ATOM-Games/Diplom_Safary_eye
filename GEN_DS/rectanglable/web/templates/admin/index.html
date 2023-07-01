@@ -1,0 +1,221 @@
+<html>
+	<head>
+		<title>Тест сервера</title>
+		<style rel="stylesheet" type="text/css">
+			#input_list_div {
+				display : block;
+				border : 1px solid red;
+				width : 200px;
+				height : 600px;
+				overflow : scroll;
+			}
+			#kartinka {
+				display : block;
+				border : 1px solid black;
+				width : 600px;
+				height : 600px;
+				 background-size: 100% 100%;
+			}
+			
+			.list_element {
+				margin-bottom: 5px;
+				border-radius: 5px;
+			}
+			.list_element:hover {
+				margin-bottom: 5px;
+				border-radius: 5px;
+			}
+			.nothas_txt {
+				background-color: #FF9999;
+			}
+			.has_txt {
+				background-color: #99FF99;
+			}
+			.selected_list {
+				border : 1px solid black;
+			}
+			#rectangle_selcte {
+				position: relative;
+				border : 2px solid red;
+			}
+		</style>
+	</head>
+	<body>
+		<header><h1>RECTANGABLE</h1></header><!--<div id="st"></div>-->
+		<input id="address_pic" type="text" value = "C:\Users\silat\PycharmProjects\generateDataset\images\learn" />
+		<input id="address_txt" type="text" value = "C:\Users\silat\PycharmProjects\generateDataset\texts\train" />
+		<input type="button" value="получить инмена" onclick="getNames()" />		
+		
+		<table>
+			<tr>
+				<td>
+					<div id="list_string">
+					</div>
+					<div>
+						<select id="class_select">
+							<option value="0">Dog</option>
+							<option value="1">Cat</option>
+							<option value="2">Hamster</option>
+							<option value="3">Parrot</option>
+							<option value="4">Spider</option>
+							<option value="5">Goldfish</option>
+						</select>
+						<input id="class_text0" type="number" step="0.00000000001" />
+						<input id="class_text1" type="number" step="0.00000000001" />
+						<input id="class_text2" type="number" step="0.00000000001" />
+						<input id="class_text3" type="number" step="0.00000000001" />
+					</div>
+				</td>
+				<td>
+					<div id="kartinka">
+						<div id="rectangle_selcte"></div>
+					</div>
+				</td>
+				<td>
+					<div id="input_list_div">
+						<ol id="input_list">
+
+						</ol>
+					</div>
+				</td>
+			</tr>
+		</table>
+
+		
+		<!--<script src="static/jQuery3.js"></script>-->
+		<script src="{{ url_for('static', filename='static/jQuery3.js') }}"></script>
+		<script>
+			var address_pic = document.getElementById('address_pic');
+		
+			var input_list = document.getElementById('input_list');
+			var kartinka = document.getElementById('kartinka');
+			
+			var list_string = document.getElementById('list_string');
+			
+			var rectangle_selected = document.getElementById('rectangle_selcte');
+		
+			var _NAMES = [];
+			var _SELECT_NAME = -1;
+		
+			function list_element_click(id){
+				_SELECT_NAME = id;
+				$.ajax({
+					url:"http://127.0.0.1:2323/getPicture",
+					mode: 'no-cors',
+					type:"POST",
+					contentType:"applicattion/json",
+					dataType:"json",
+					data:JSON.stringify({ 
+						address_pic : address_pic.value+'/'+_NAMES[id].name_value[0]+'.'+_NAMES[id].name_value[1],
+					}),
+					success:function(message){
+						console.log('message');
+						console.log(message);
+						kartinka.setAttribute("style", "background-image: url('data:image/png;base64, " + message.img.split("'")[1]+"')");
+						_SELECT_NAME = id;
+						
+						str_list = '';
+						for(var s=0; s<_NAMES[id].txt_value.length; s++) {
+							str_list += '<button onclick="string_element_click('+s+')">'+_NAMES[id].txt_value[s]+'</button>';
+						}
+						list_string.innerHTML = str_list;
+						setStyle();
+					}
+				});
+			}
+			
+			function string_element_click(s){
+				var vars = _NAMES[_SELECT_NAME].txt_value[s].split(' ');
+				document.getElementById('class_select').childNodes.forEach(
+					element => {
+						if(element.value == vars[0])
+							element.selected = true;
+					}
+				);
+			
+				document.getElementById('class_text0').value = Number.parseFloat(vars[1]);
+				document.getElementById('class_text1').value = Number.parseFloat(vars[2]);
+				document.getElementById('class_text2').value = Number.parseFloat(vars[3]);
+				document.getElementById('class_text3').value = Number.parseFloat(vars[4]);
+			
+				setElementSelect(true);
+			}
+			
+			function setElementSelect(tf){
+				if(tf==true){
+					var lf = float_to_int(document.getElementById('class_text0').value, 600); // left
+					var tp = float_to_int(document.getElementById('class_text1').value, 600); // top
+					
+					var wh = float_to_int(document.getElementById('class_text2').value, 600); // width
+					var hg = float_to_int(document.getElementById('class_text3').value, 600); // height
+
+					var real_x = lf - wh/2;
+					var real_y = tp - hg/2;
+
+					rectangle_selected.setAttribute('style','display:block; position:relative; left:'+real_x+'px; top:'+real_y+'px; width:'+wh+'px; height:'+hg+'px;');
+				} else {
+					rectangle_selected.setAttribute('style','display:none;');
+				}
+			}
+			setElementSelect(false);
+			function float_to_int(value, max_int) {
+				return (max_int * value);
+			}
+			
+			
+			
+		
+			function getNames() {
+				console.log('on click');
+				input_list.innerHTML = '';
+				
+				$.ajax({
+					url:"http://127.0.0.1:2323/getNames",
+					mode: 'no-cors',
+					type:"POST",
+					contentType:"applicattion/json",
+					dataType:"json",
+					data:JSON.stringify({ 
+						address_pic : address_pic.value,
+						address_txt : address_txt.value,
+					}),
+					success:function(message){
+						console.log('message');
+						console.log(message);
+						if(message.names && message.names.length > 0){
+							_NAMES = message.names;
+							setListNames();
+						}
+					}
+				});
+			}
+			
+			function setListNames() {
+				var html = '';
+				for(var i=0; i<_NAMES.length; i++) {
+					html += '<li onclick="list_element_click('+i+')">'+_NAMES[i].name_value[0]+'.'+_NAMES[i].name_value[1]+'</li>'
+				}
+				console.log(html);
+				input_list.innerHTML = html.toString();
+				setStyle();
+			}
+			
+			function setStyle() {
+				for(var i=0; i<_NAMES.length; i++) {
+					var class_name = 'list_element';
+					if(_NAMES[i].txt_value.length == 0) {
+						class_name += ' nothas_txt';
+					} else {
+						class_name += ' has_txt';
+					}
+					if(i==_SELECT_NAME) class_name += ' selected_list';
+					input_list.childNodes[i].setAttribute('class', class_name)
+				}
+			}
+			
+			
+			
+			
+		</script>
+	</body>
+</html>
