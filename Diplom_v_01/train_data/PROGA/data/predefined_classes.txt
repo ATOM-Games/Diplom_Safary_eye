@@ -1,0 +1,4 @@
+pistol_s
+pistol_p
+avtomat_s
+avtomat_p
