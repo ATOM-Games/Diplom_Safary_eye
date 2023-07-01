@@ -1,0 +1,10 @@
+path: dataset  # dataset root dir
+train: images/train  # train images (relative to 'path') 128 images
+val: images/val  # val images (relative to 'path') 128 images
+test:  # test images (optional)
+
+# Classes
+nc: 4  # number of classes
+names: ['cls_0', 'cls_1', 'cls_2', 'cls_3']  # class names
+
+

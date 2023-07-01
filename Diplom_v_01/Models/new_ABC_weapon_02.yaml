@@ -1,0 +1,10 @@
+path: ../../train_data  # dataset root dir
+train: images/train  # train images (relative to 'path') 128 images
+val: images/val  # val images (relative to 'path') 128 images
+test:  # test images (optional)
+
+# Classes
+nc: 23  # number of classes
+names: ['cls_0', 'cls_1', 'cls_2', 'cls_3', 'cls_4', 'cls_5', 'cls_6', 'cls_7', 'cls_8', 'cls_9', 'cls_10', 'cls_11', 'cls_12', 'cls_13', 'cls_14', 'cls_15', 'cls_16', 'cls_17', 'cls_18', 'cls_19', 'cls_20', 'cls_21', 'cls_22']  # class names
+
+
