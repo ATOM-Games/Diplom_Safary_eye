@@ -1,0 +1,1 @@
+C:\Users\1\PycharmProjects\Diplom_v_01\venv\Python39\python.exe train/train2.py --img 640 --batch 16 --epochs 30 --data data/ABC_weapon_02.yaml --weights yolov5s.pt --cache

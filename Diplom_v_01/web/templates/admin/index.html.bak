@@ -1,0 +1,206 @@
+<html>
+	<head>
+		<title>Тест сервера</title>
+		<style rel="stylesheet" type="text/css">
+			body { 
+				background-color: rgb(215, 225, 235);
+			}
+			
+			header {
+				font-family: ru_01;
+				width: 100%;
+				flex-wrap: wrap;
+				justify-content: space-between;
+				background: linear-gradient(0deg, rgba(1,41,112,0.1), #fff, rgba(1,41,112,0.1));
+				text-align : center;
+				padding : 1px;
+			}
+			#detBut, #camer {
+				border-radius: 2px;
+				border :rgb(67, 151, 177) solid 1px;
+				width: 90%;
+				margin : 0px auto;
+				text-align: center;
+				display : block;
+				transition: 0.3s;
+				background-color: rgb(225, 235, 245);
+				outline: none;
+			}
+			#detBut:hover, #camer:hover {
+				border-radius: 2px;
+				border :rgb(14, 114, 145) solid 1px;
+				width: 100%;
+				margin : 0px auto;
+				text-align: center;
+				display : block;
+				transition: 0.3s;
+				background-color: rgb(187, 208, 230);
+				outline: none;
+			}
+			input[type='range'] {
+				width: 250px;
+				-webkit-appearance: none;
+				background-color: #44eeff;
+				border-radius : 5px;
+			}
+			
+			input[type='range']::-webkit-slider-runnable-track {
+				height: 10px;
+				-webkit-appearance: none;
+				color: #13bba4;
+				border-radius : 5px;
+				box-shadow: 0 0 2px 1px #222;
+				background-color: rgb(225, 235, 245);
+			}
+			
+			input[type='range']::-webkit-slider-thumb {
+				width: 20px;
+				-webkit-appearance: none;
+				height: 20px;
+				cursor: ew-resize;
+				background: #dddddd;
+				border :rgb(67, 151, 177) solid 1px;
+				box-shadow: 0 0 5px 3px #222;
+				border-radius : 10px;
+				margin-top : -5px;
+				transition: 0.3s;
+			}
+			input[type='range']::-webkit-slider-thumb:hover {
+				width: 14px;
+				-webkit-appearance: none;
+				height: 14px;
+				cursor: ew-resize;
+				background: #dddddd;
+				border :rgb(67, 151, 177) solid 1px;
+				box-shadow: 0 0 5px 3px #222;
+				border-radius : 7px;
+				margin-top : -3px;
+				transition: 0.3s;
+			}
+			#detectIMG { width:400px; height:300px; border:1px solid #550000; margin-left: -406px; margin-right: 20px; }
+			#detectC { width:400px; height:300px; border:1px solid #005500; margin-right: 0px; }
+		</style>
+	</head>
+	<body>
+		<header><h1>Тест сервера</h1></header><!--<div id="st"></div>->
+		<table><tr><td>
+			<canvas id="detectC" width="400" height="300"></canvas>
+			<img id="detectIMG" />
+			
+		</td><td>
+		<button id="detBut" onclick="startDetect()" >Запуск анализа</button><br/>
+		<input id="camer" type="text" value="10.0.0.195:10001"/>
+		<!--<select id="camer">
+		   <option disabled>Выберите камеру</option>
+		   <option value="0">Веб-камера</option>
+		   <option value="1">Доп-камера</option>
+		</select>--><br/>
+		<input type="checkbox" id="Det_to_screen" checked>Результат на монитор</input><br/><br/>
+		<input type="range" id="step_01" min="0" max="1" value="0.25" step="0.01"> верхний порог чувствительности<br/><br/>
+		<input type="range" id="step_02" min="0" max="1" value="0.45" step="0.01"> нижний порог чувствительности<br/><br/>
+		</td></tr></table>
+		
+		
+		
+		<!--<script src="static/jQuery3.js"></script>-->
+		<script src="{{ url_for('static', filename='static/jQuery3.js') }}"></script>
+		<script>
+			var detBut = document.getElementById('detBut');
+			//var st_div = document.getElementById('st');
+			var imag = document.getElementById('detectIMG');
+			var status = 'OFF';
+			//---
+			var ctx = document.getElementById("detectC").getContext("2d");
+			
+			alert("I am Alive");
+			function startDetect(){
+				detBut.setAttribute('onclick', 'stopDetect()');
+				detBut.innerHTML = 'Остановка анализа';
+				$.ajax({
+					url:"http://127.0.0.1:5003/status",
+					mode: 'no-cors',
+					type:"POST",
+					contentType:"applicattion/json",
+					dataType:"json",
+					data:JSON.stringify({ 
+						detect : 'start',
+						camera : document.getElementById('camer').value,//document.getElementById('camer').options[document.getElementById('camer').selectedIndex].value,
+						step_01 : document.getElementById('step_01').value,
+						step_02 : document.getElementById('step_02').value
+					}),
+					success:function(message){
+						//document.getElementById("nerus_trs").setAttribute('value', message["translate"]);
+					}
+				});
+				getStatus();
+			}
+			function stopDetect(){
+				detBut.setAttribute('onclick', 'startDetect()');
+				detBut.innerHTML = 'Запуск анализа';
+				$.ajax({
+					url:"http://127.0.0.1:5003/status",
+					mode: 'no-cors',
+					type:"POST",
+					contentType:"applicattion/json",
+					dataType:"json",
+					data:JSON.stringify({ 
+						detect : 'stop',
+						camera : '-',
+						step_01 : '0',
+						step_02 : '0'
+					}),
+					success:function(message){
+						//document.getElementById("nerus_trs").setAttribute('value', message["translate"]);
+					}
+				});
+			}
+			
+			function Update(){
+				getStatus();
+				
+				setTimeout(Update, 200);
+			}
+			Update();
+			function getStatus(){
+				ctx.clearRect(0, 0, 400, 300);
+				ctx.beginPath();
+				$.ajax({
+					url:"http://127.0.0.1:5003/resultDetect",
+					mode: 'no-cors',
+					type:"POST",
+					contentType:"applicattion/json",
+					dataType:"json",
+					data:JSON.stringify({
+						det : document.getElementById('Det_to_screen').checked ? 'detect' : 'default'
+					}),
+					success:function(message){
+						let status = message["status"];
+						let v = message["detectes"].length;
+						detBut.disabled = (message["status"]== 'Wait');
+						
+						if(message["status"] == 'Detect'){
+							var l = message["res_img"].split("'")[1]+"";
+							imag.setAttribute('src', "data:image/png;base64," + l);
+							if(document.getElementById('Det_to_screen').checked && v > 0){
+								status += " <b style='color:red'>ОПАСНОСТЬ</b>"
+								for(let i=0; i<v; i += 1){
+									ctx.strokeStyle = "red"; //цвет обводки
+									ctx.lineWidth = "2"; //толщина обводки
+									let x = parseInt(message["detectes"][i].split('|')[0], 10);
+									let y = parseInt(message["detectes"][i].split('|')[1], 10);
+									let w = parseInt(message["detectes"][i].split('|')[2], 10);
+									let h = parseInt(message["detectes"][i].split('|')[3], 10);
+									console.error(message["detectes"][i].split('|')[0]);
+									ctx.rect(x/1.75, y/1.75, w/1.75, h/1.75);
+									ctx.stroke();
+								}
+							}
+						}
+						//st_div.innerHTML = status;
+					}
+				});
+			}
+			
+		</script>
+	</body>
+</html>
