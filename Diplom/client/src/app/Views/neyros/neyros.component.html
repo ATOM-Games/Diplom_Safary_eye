@@ -1,0 +1,60 @@
+<table id="servers">
+    <tr>
+        <td style="display:flex">
+            <div class="OYY">Общий уровень угрозы : </div><div class="{{getClass()}}" style="display : inline-block"></div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <app-neuro-module *ngFor = "let md of mod | keyvalue" [data]="md"></app-neuro-module>
+            <button class="newModule" (click)="add_popup_function()">Новый модуль</button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            мой ip : <i>{{my_ip_pt}}</i>
+        </td>
+    </tr>
+</table>
+
+<apl [_SHOW_AD_PANEL]="_SHOW_AD_PANEL" (onClosePanel)="onClosePanelVoid($event)"></apl>
+
+<div id="popup_add" *ngIf="add_popup">
+    <div id="popup">
+        <h3>Новый модуль</h3>
+        <form [formGroup]="PopupForm" (ngSubmit)="ok_popup_function()">
+            <table>
+                <tr>
+                    <td class="label sin" id="l_name">ключ модуля</td>
+                    <td><input formControlName="PoPuP_NaMe" id="i_name" class="input sin" type="text"/></td>
+                </tr><tr>
+                    <td class="label sin" id="l_rname">название модуля</td>
+                    <td><input formControlName="PoPuP_RNaMe" id="i_rname" class="input sin" type="text"/></td>
+                </tr><tr>
+                    <td class="label sin" id="l_ip">ip модуля</td>
+                    <td><input formControlName="PoPuP_Ip" id="i_ip" class="input sin" type="text"/></td>
+                </tr><tr>
+                    <td class="label sin" id="l_port">порт модуля</td>
+                    <td><input formControlName="PoPuP_PoRt" id="i_port" class="input sin" type="number"/></td>
+                </tr>
+                <tr>
+                    <td class="label sin" id="l_port">частота оповещений (в сек)</td>
+                    <td><input formControlName="PoPuP_Cool" id="i_cool" class="input sin" type="number"/></td>
+                </tr>
+                <tr>
+                    <td class="label sin" id="l_port">сообщение</td>
+                    <td><textarea formControlName="PoPuP_Mess" id="i_mess" class="input sin"></textarea></td>
+                </tr>
+            </table><br/>
+            <table>
+                <tr>
+                    <td>
+                        <input type="submit" class="button" value="Создать модуль"/>
+                    </td><td>
+                        <button class="button"(click)="cancel_popup_function()">Отмена</button>
+                    </td>
+                </tr> 
+            </table>
+        </form>
+    </div>
+</div>

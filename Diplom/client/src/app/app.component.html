@@ -1,0 +1,32 @@
+<div class="toolbar" role="banner">
+    <header class="header d-flex align-items-center">
+      <div class="d-flex align-items-center justify-content-between">
+        Список подписчиков
+        <i class="bi bi-list toggle-sidebar-btn" (click)="openPanelAd()"></i>
+      </div>
+      <div *ngIf="isAuth()" class="profile">
+        <ul>
+          <li><button (click)="logout()" class="logoutbutton">выход</button></li>
+          <li><b>{{getUserName()}}</b></li>
+          <li><!--<img src="http://127.0.0.1:2525/{{getSrcIco()}}" id="icon"/>--></li>
+        </ul>
+      </div>
+    </header>
+    <div *ngIf="!isAuth()">
+      <app-user></app-user>
+    </div>
+    <div *ngIf="isAuth()">
+      <main id="main" class="main">
+        <app-neyros [_SHOW_AD_PANEL]="_SHOW_AD_PANEL" (onClosePanel)="close($event)"></app-neyros>
+      </main>
+    </div>
+    <footer id="footer" class="footer" style="vertical-align: bottom;">
+      <div class="copyright">
+        Created by A.B.C. © ℗ ™
+      </div>
+      <div class="credits">
+        Антонов В.С.
+      </div>
+    </footer>
+  </div>
+  <router-outlet></router-outlet>

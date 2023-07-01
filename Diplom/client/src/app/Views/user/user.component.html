@@ -1,0 +1,78 @@
+<main id="main" class="main">
+    <div class="pagetitle">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button (click)="this.login = true"
+              class="nav-link" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home">Авторизация</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button (click)="this.login = false"
+              class="nav-link" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home">Регистрация</button>
+            </li>
+          </ul>
+    </div>
+    <!--login-->
+    <section class="section dashboard" *ngIf = "login">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <hr/>
+                    <div class="error" *ngIf="(errorText!='')">{{errorText}}</div>
+                    <form [formGroup]="login_form" (ngSubmit)="onLogin()">
+                        <input formControlName="login"
+                        type="text" required placeholder="введите логин"/><br/>
+                        <input formControlName="password"
+                        type="password" required placeholder="введите пароль"/><br/>
+                        <hr/>
+                        <table style="width: 100%; height: 25px;"><tr>
+                            <td style="width: 50%;">
+                                <input [disabled]="login_form.invalid || login_form.disabled"
+                                type="submit" value="войти"/>
+                            </td>
+                            <td style="width: 50%;">
+                                <input type="reset" value="очистить"/>
+                            </td>
+                        </tr></table>
+                    </form>
+                    <hr/>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--registration-->
+    <section class="section dashboard" *ngIf="!login">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <hr/>
+                    <div class="error" *ngIf="(errorText!='')">{{errorText}}</div>
+                    <form [formGroup]="regis_form" (ngSubmit)="onRegis()">
+                        <input formControlName="login"
+                        type="text" required placeholder="введите логин"/><br/>
+                        <input formControlName="password"
+                        type="password" required placeholder="введите пароль"/><br/>
+                        <hr/>
+                        <input formControlName="f_name"
+                        type="text" required placeholder="введите имя"/><br/>
+                        <input formControlName="s_name"
+                        type="text" required placeholder="введите фамилию"/><br/>
+                        <hr/>
+                        <input type="file" #inputFile hidden formControlName="imageSrc" placeholder="картинка на аватарку" (change)="uploadFile($event)"/>
+                        <input type="button"value="Загрузить картинку" (click)="inputFileClick()"/>
+                        <hr/>
+                        <table style="width: 100%;"><tr>
+                            <td style="width: 50%;">
+                                <input [disabled]="regis_form.invalid || regis_form.disabled"
+                                type="submit" value="зарегистрироваться"/>
+                            </td>
+                            <td style="width: 50%;">
+                                <input type="reset" value="очистить"/>
+                            </td>
+                        </tr></table>
+                    </form>
+                    <hr/>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

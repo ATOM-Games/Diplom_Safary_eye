@@ -1,0 +1,12 @@
+@font-face {
+    font-family: ru_01;
+    src: url('./assets/font/Tolkien.ttf');
+}
+@font-face {
+    font-family: ru_02;
+    src: url('./assets/font/Whitehall.ttf');
+}
+@font-face {
+    font-family: ru_03;
+    src: url('./assets/font/Nexa_Script.ttf');
+}

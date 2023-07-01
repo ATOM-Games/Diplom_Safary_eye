@@ -1,0 +1,96 @@
+@import url('../../../assets/myScc/vars.less');
+
+.sidebar {
+    background-color: rgb(225, 235, 245);
+}
+#myTab {
+    margin : 0 auto;
+    justify-content: space-around;
+}
+#myTab li button {
+    border :rgb(189, 219, 219) solid 1px;
+    background-color: #fff;
+    margin-left: 5px;
+    color :rgb(37, 42, 44);
+    width: 300px;
+}
+.pagetitle {
+    border-bottom: 4px ridge rgba(88, 134, 161, 0.6);
+}
+.card {
+    background-color : var(--module_backgroundcolor);
+}
+.card-body {
+    margin-right: 200px;
+    margin-left: 200px;
+}
+.card-body input[type=text], .card-body input[type=password] {
+    border-radius: 2px;
+    border :rgb(116, 142, 150) solid 1px;
+    width: 90%;
+    display: block;
+    margin : 1px auto;
+    text-align: center;
+    transition: 0.3s;
+    outline: none;
+}
+.card-body input[type=text]:focus, .card-body input[type=password]:focus {
+    border-radius: 2px;
+    border :rgb(54, 135, 160) solid 1px;
+    width: 100%;
+    margin : 1px auto;
+    display: block;
+    text-align: center;
+    transition: 0.3s;
+    outline: none;
+}
+.card-body input[type=submit], .card-body input[type=reset] {
+    border-radius: 2px;
+    border :rgb(67, 151, 177) solid 1px;
+    width: 90%;
+    margin : 0px auto;
+    text-align: center;
+    display : block;
+    transition: 0.3s;
+    background-color: var(--module_buttoncolor);
+    outline: none;
+}
+.card-body input[type=submit]:hover, .card-body input[type=reset]:hover {
+    border-radius: 2px;
+    border :rgb(14, 114, 145) solid 1px;
+    width: 100%;
+    margin : 0px auto;
+    text-align: center;
+    display : block;
+    transition: 0.3s;
+    background-color: var(--module_buttoncolorhover);
+    outline: none;
+}
+.card-body input[type=button] {
+    border-radius: 2px;
+    border :rgb(67, 151, 177) solid 1px;
+    width: 75%;
+    margin : 0px auto;
+    display : block;
+    text-align: center;
+    transition: 0.3s;
+    background-color: var(--module_buttoncolor);
+    outline: none;
+}
+.card-body input[type=button]:hover {
+    border-radius: 2px;
+    border :rgb(67, 151, 177) solid 1px;
+    width: 90%;
+    margin : 0px auto;
+    display : block;
+    text-align: center;
+    transition: 0.3s;
+    background-color: var(--module_buttoncolor);
+    outline: none;
+}
+.error {
+    color: #FF0000;
+    font-weight: bold;
+    font-style: italic;
+    text-align: center;
+}

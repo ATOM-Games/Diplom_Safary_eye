@@ -1,0 +1,92 @@
+<table id="adminPanel" *ngIf="_SHOW_AD_PANEL">
+    <tr>
+        <th>
+            <h3>Список подписчиков</h3>
+        </th>
+        <th>
+            <svg (click)="close()" class="panel_close" title="close" width="30px" height="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <title>скрыть панель</title>
+                <g id="Edit / Close_Square">
+                    <path id="Vector" d="M9 9L11.9999 11.9999M11.9999 11.9999L14.9999 14.9999M11.9999 11.9999L9 14.9999M11.9999 11.9999L14.9999 9M4 16.8002V7.2002C4 6.08009 4 5.51962 4.21799 5.0918C4.40973 4.71547 4.71547 4.40973 5.0918 4.21799C5.51962 4 6.08009 4 7.2002 4H16.8002C17.9203 4 18.4801 4 18.9079 4.21799C19.2842 4.40973 19.5905 4.71547 19.7822 5.0918C20.0002 5.51962 20.0002 6.07967 20.0002 7.19978V16.7998C20.0002 17.9199 20.0002 18.48 19.7822 18.9078C19.5905 19.2841 19.2842 19.5905 18.9079 19.7822C18.4805 20 17.9215 20 16.8036 20H7.19691C6.07899 20 5.5192 20 5.0918 19.7822C4.71547 19.5905 4.40973 19.2842 4.21799 18.9079C4 18.4801 4 17.9203 4 16.8002Z" stroke="#767676" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </g>
+            </svg>
+        </th>
+    </tr>
+    <tr>
+        <th id="list_listeners" colspan="2">
+            <table>
+                <tr *ngFor = "let md of listeners | keyvalue" (click)="click_select_listener(md.key)">
+                    <th>{{getNumber(md.key, false)}}</th>
+                    <th>{{md.value.name}}</th>
+                    <th>{{md.value.family}}</th>
+                </tr>
+            </table>
+        </th>
+    </tr>
+    <tr>
+        <th colspan="2">
+            <div class="add_listener" (click)="click_add_listener()">Добавить подписчика</div>
+        </th>
+    </tr>
+</table>
+
+<!--add listeners-->
+<div class="popup_podl" *ngIf="_add_listener">
+    <div id="popup_add_listener">
+        <h3>Новый подписчик</h3>
+        <div *ngIf="_error_text.length>0" class="_error_text">{{_error_text}}</div>
+        <form [formGroup]="_add_listener_PopupForm" (ngSubmit)="ok_popup_add_listener()">
+            <table>
+                <tr>
+                    <td class="label sin" id="l_number">номер телефона</td>
+                    <td><input formControlName="_a_l_number" id="i_number" class="input sin" type="number" style="color:white" max="99999999999"/><div class="placeholderw">{{getNumber2()}}</div></td>
+                </tr><tr>
+                    <td class="label sin" id="l_name">имя</td>
+                    <td><input formControlName="_a_l_name" id="i_name" class="input sin" type="text"/></td>
+                </tr><tr>
+                    <td class="label sin" id="l_family">фамилия</td>
+                    <td><input formControlName="_a_l_family" id="i_family" class="input sin" type="text"/></td>
+                </tr>
+            </table><br/>
+            <table>
+                <tr>
+                    <td>
+                        <input type="submit" class="button" value="Создать подписчика"/>
+                    </td><td>
+                        <button class="button"(click)="cancel_popup_add_listener()">Отмена</button>
+                    </td>
+                </tr> 
+            </table>
+        </form>
+    </div>
+</div>
+<!--select listeners-->
+<div class="popup_podl" *ngIf="selected_listener.length>1">
+    <div id="popup_listener">
+        <h3>Подписчик</h3>
+        <table>
+            <tr>
+                <td>Имя : </td><td>{{getObject().name}}</td>
+                <td rowspan="4" class="sposok">
+                    <div *ngFor="let md of buttons_subs" class="{{buttons_subs_getclass(md.subs)}}" (click)="buttons_subs_click(md.id, selected_listener, md.subs)">
+                        <b>{{md.name}}</b><br/>
+                        <i>{{buttons_subs_gettext(md.subs)}}</i>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>фамилия : </td><td>{{getObject().family}}</td>
+            </tr>
+            <tr>
+                <td>Номер телефона : </td><td>{{getNumber(getObject().number.toString(), false)}}</td>
+            </tr>
+            <tr>
+                <td>
+                    <button class="button"(click)="close_select_listener()">Закрыть</button>
+                </td><td>
+                    
+                </td>
+            </tr> 
+        </table>
+    </div>
+</div>

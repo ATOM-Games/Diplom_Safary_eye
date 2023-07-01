@@ -1,0 +1,48 @@
+@import url('../fonts.css');
+@import url('../assets/myScc/vars.less');
+
+#icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    border : thick double #32a1ce;
+    display: inline;
+}
+.header {
+    font-family:ru_01;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    background: linear-gradient(0deg, rgba(1,41,112,0.1), #fff, rgba(1,41,112,0.1));
+}
+.profile {
+    right: 0px;
+    padding-top: 5px;
+    display: block;
+    float: right;
+}
+.profile ul {
+    vertical-align: middle;
+}
+
+.profile li {
+    list-style-type: none;
+    display : inline-block;
+    margin-inline: 15px;
+    height: 100%;
+    font-family:ru_01;
+}
+.profile .logoutbutton {
+    font-style: italic;
+    margin-right: 20px;
+    border-style: none;
+    background-color: rgba(255, 255, 255, 0);
+    color:rgb(105, 146, 170);
+    text-shadow: #000;
+    height: 100%;
+}
+
+#footer {
+    font-style: italic;
+    bottom: 0;
+}

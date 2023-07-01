@@ -1,0 +1,267 @@
+@import url('../../../assets/myScc/vars.less');
+
+.nm {
+    border : @_module_border;
+    padding : 30px;
+    margin : 10px auto;
+    background-color : @_module_backgroundcolor;
+    width : 600px;
+    border-radius : 30px;
+    size : 30pt;
+}
+
+.nm table {
+    width : 100%;
+}
+
+.nm input[type=text] {
+    border : 1px solid #1b550048;
+    padding: 10px;
+}
+
+.nm button {
+    border-radius: 2px;
+    border :rgb(67, 151, 177) solid 1px;
+    width: 90%;
+    margin : 0px auto;
+    text-align: center;
+    display : block;
+    transition: 0.3s;
+    background-color: @_module_buttoncolor;
+    outline: none;
+}
+.nm button:hover {
+    border-radius: 2px;
+    border :rgb(14, 114, 145) solid 1px;
+    width: 100%;
+    margin : 0px auto;
+    text-align: center;
+    display : block;
+    transition: 0.3s;
+    background-color: @_module_buttoncolorhover;
+    outline: none;
+}
+
+.light_gray { 
+    width : 50px;
+    height : 50px;
+    border-radius : 25px;
+    border : 2px solid #555555;
+    background-color : #e9e9e9;
+}
+.light_green {
+    width : 50px;
+    height : 50px;
+    border-radius : 25px;
+    border : 2px solid #1b5500;
+    background-color: #10e910;
+}
+.light_red { 
+    width : 50px;
+    height : 50px;
+    border-radius : 25px;
+    border : 2px solid #550000;
+    background-color : #e91010;
+}
+.of_mode {
+    margin-right: 15px;
+}
+.onn {
+    fill: green
+}
+.off {
+    fill: gray
+}
+.unk {
+    fill: red
+}
+.microicons {
+    display: inline;
+    float: right;
+    margin-top: -10px;
+    margin-right: -10px;
+    .microicon{
+        display: inline;
+        cursor: pointer;
+        .edit{
+            fill:@microicon;
+        }
+        .delete {
+            path {
+                stroke: @microicon;
+            }
+        }
+    }
+    .microicon:hover{
+        display: inline;
+        cursor: pointer;
+        .edit{
+            fill:@microiconhover;
+        }
+        .delete {
+            path {
+                stroke: @microiconhover;
+            }
+        }
+    }
+}
+#popup_edit {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #0000009e;
+    z-index: 999;
+
+    #popup {
+        background-color : @_popup_background_color;
+        width: 500px;
+        margin: 200px auto;
+        padding: 40px;
+        border : @_popup_background_border;
+        box-shadow: @_popup_background_shadow;
+        border-radius : 30px;
+
+        .label {
+            &.sin{
+                color: black;
+            }
+            &.red{
+                color: red;
+                font-weight: bold;
+            }
+        }
+        .input{
+            border-radius: 5px;
+            margin: 5px;
+            width: 250px;
+            &.sin{
+                box-shadow: #003d55 0 0 2px;
+                border: 1px solid #003d55;
+            }
+            &.red{
+                box-shadow: red 0 0 2px;
+                border: 1px solid red;
+            }
+        }
+
+        h3 {
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            tr{
+                td{
+                    input{
+                        padding-bottom: 3px;
+                    }
+                }
+                border-bottom: #555555 solid 1px;
+            }
+        }
+        .button {
+            border-radius: 2px;
+            border :rgb(67, 151, 177) solid 1px;
+            width: 90%;
+            margin : 0 auto;
+            text-align: center;
+            display : block;
+            transition: 0.3s;
+            background-color: @_module_buttoncolor;
+            outline: none;
+        }
+        .button:hover {
+            border-radius: 2px;
+            border :rgb(14, 114, 145) solid 1px;
+            width: 100%;
+            margin : 0 auto;
+            text-align: center;
+            display : block;
+            transition: 0.3s;
+            background-color: @_module_buttoncolorhover;
+            outline: none;
+        }
+    }
+
+}
+#popup_delete {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #0000009e;
+    z-index: 999;
+
+    #popup {
+        background-color : rgb(218, 236, 247);
+        width: 600px;
+        margin: 200px auto;
+        padding: 40px;
+        border : 1px solid #003d55;
+        box-shadow: #003d55 0 0 50px;
+        border-radius : 30px;
+
+        .label {
+            &.sin{
+                color: black;
+            }
+            &.red{
+                color: red;
+                font-weight: bold;
+            }
+        }
+        .input{
+            border-radius: 5px;
+            margin: 5px;
+            width: 250px;
+            &.sin{
+                box-shadow: #003d55 0 0 2px;
+                border: 1px solid #003d55;
+            }
+            &.red{
+                box-shadow: red 0 0 2px;
+                border: 1px solid red;
+            }
+        }
+
+        h3 {
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            tr{
+                td{
+                    input{
+                        padding-bottom: 3px;
+                    }
+                }
+                border-bottom: #555555 solid 1px;
+            }
+        }
+        .button {
+            border-radius: 2px;
+            border :rgb(67, 151, 177) solid 1px;
+            width: 90%;
+            margin : 0 auto;
+            text-align: center;
+            display : block;
+            transition: 0.3s;
+            background-color: rgb(225, 235, 245);
+            outline: none;
+        }
+        .button:hover {
+            border-radius: 2px;
+            border :rgb(14, 114, 145) solid 1px;
+            width: 100%;
+            margin : 0 auto;
+            text-align: center;
+            display : block;
+            transition: 0.3s;
+            background-color: rgb(187, 208, 230);
+            outline: none;
+        }
+    }
+
+}

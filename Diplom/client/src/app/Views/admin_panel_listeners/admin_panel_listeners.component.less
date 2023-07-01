@@ -1,0 +1,286 @@
+@import url('../../../assets/myScc/vars.less');
+
+#adminPanel {
+    border: @_module_border;
+    background-color : @_module_backgroundcolor;
+    width: 500px;
+    height: calc(100vh - 50px);
+    position: fixed;
+    left: 5px;
+    top: 5px;
+    padding-top: 10px;
+    padding-left: 25px;
+    display: block;
+
+    tr{
+        width: 100%;
+        .panel_close {
+            display: block;
+            margin-left: 10px;
+            margin-bottom: 5px;
+            cursor: pointer;
+            path{
+                stroke: @microicon;
+            }
+        }
+        .panel_close:hover {
+            display: block;
+            margin-left: 10px;
+            margin-bottom: 5px;
+            cursor: pointer;
+            path{
+                stroke: @microiconhover;
+            }
+        }
+    }
+
+    #list_listeners {
+        width: calc(100% + 15px);
+        height: calc(100vh - 170px);
+        display: block;
+        border: 3px inset;
+        overflow-y: scroll;
+        background-color: @_input_border_color;
+        table {
+            width: calc(100% - 12px);
+            margin: 5px;
+            border-collapse: separate;
+            border-spacing: 0 10px;
+            tr {
+                cursor: pointer;
+                background-color: white;
+                th {
+                    padding: 10px;
+                }
+                th:first-child {
+                    border-top-left-radius: 10px;
+                    border-bottom-left-radius: 10px;
+                }
+                th:last-child {
+                    border-top-right-radius: 10px;
+                    border-bottom-right-radius: 10px;
+                }
+            }
+        }
+    }
+    .add_listener {
+        cursor: pointer;
+        border: 1px outset;
+        background-color: @_module_backgroundcolor;
+        margin-right: 20px;
+        margin-top: 10px;
+        border-radius: 15px;
+        padding: 5px;
+        text-align: center;
+    }
+    .add_listener:hover {
+        cursor: pointer;
+        border: 1px outset;
+        background-color: @_module_border_color_dark;
+        margin-right: 20px;
+        margin-top: 10px;
+        border-radius: 15px;
+        padding: 5px;
+        text-align: center;
+    }
+}
+
+.popup_podl {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #0000009e;
+    z-index: 999;
+
+    #popup_add_listener {
+        background-color : @_popup_background_color;
+        width: 500px;
+        margin: 200px auto;
+        padding: 40px;
+        border : @_popup_background_border;
+        box-shadow:  @_popup_background_shadow;
+        border-radius : 30px;
+        .label {
+            &.sin{
+                color: black;
+            }
+            &.red{
+                color: red;
+                font-weight: bold;
+            }
+        }
+        .input{
+            border-radius: 5px;
+            margin: 5px;
+            width: 250px;
+            &.sin{
+                box-shadow: #003d55 0 0 2px;
+                border: 1px solid #003d55;
+            }
+            &.red{
+                box-shadow: red 0 0 2px;
+                border: 1px solid red;
+            }
+        }
+        .placeholderw {
+            width: 150px;
+            border-radius: 5px;
+            min-height: 30px;
+            margin-left: 7px;
+            margin-top: -32px;
+            display: block;
+        }
+        h3 {
+            text-align: center;
+        }
+        ._error_text{
+            color:red;
+            width: 100%;
+            display: block;
+            text-align: center;
+            font-style: italic;
+        }
+        table {
+            width: 100%;
+            tr{
+                td{
+                    input{
+                        padding-bottom: 3px;
+                    }
+                }
+                border-bottom: #555555 solid 1px;
+            }
+        }
+        .button {
+            border-radius: 2px;
+            border :rgb(67, 151, 177) solid 1px;
+            width: 90%;
+            margin : 0 auto;
+            text-align: center;
+            display : block;
+            transition: 0.3s;
+            background-color: @_module_buttoncolor;
+            outline: none;
+        }
+        .button:hover {
+            border-radius: 2px;
+            border :rgb(14, 114, 145) solid 1px;
+            width: 100%;
+            margin : 0 auto;
+            text-align: center;
+            display : block;
+            transition: 0.3s;
+            background-color: @_module_buttoncolorhover;
+            outline: none;
+        }
+    }
+
+    #popup_listener {
+        background-color : @_popup_background_color;
+        width: 700px;
+        margin: 200px auto;
+        padding: 40px;
+        border : @_popup_background_border;
+        box-shadow: @_popup_background_shadow;
+        border-radius : 30px;
+        .label {
+            &.sin{
+                color: black;
+            }
+            &.red{
+                color: red;
+                font-weight: bold;
+            }
+        }
+        .sposok {
+            border: 1px outset;
+            width: 300px;
+            overflow-y: scroll;
+            vertical-align: top;
+            cursor: pointer;
+            div {
+                display: block;
+                border: 1px solid #003d55;
+                padding: 5px;
+                width: 100%;
+                margin-bottom: 5px;
+                border-radius: 5px;
+            }
+            .subs {
+                background-color: #b1ebc7;
+            }
+            .dontsuns {
+                background-color: #ebb1b1;
+            }
+        }
+        .input{
+            border-radius: 5px;
+            margin: 5px;
+            width: 250px;
+            &.sin{
+                box-shadow: #003d55 0 0 2px;
+                border: 1px solid #003d55;
+            }
+            &.red{
+                box-shadow: red 0 0 2px;
+                border: 1px solid red;
+            }
+        }
+        .placeholderw {
+            width: 150px;
+            border-radius: 5px;
+            min-height: 30px;
+            margin-left: 7px;
+            margin-top: -32px;
+            display: block;
+        }
+        h3 {
+            text-align: center;
+        }
+        ._error_text{
+            color:red;
+            width: 100%;
+            display: block;
+            text-align: center;
+            font-style: italic;
+        }
+        table {
+            width: 100%;
+            tr{
+                td{
+                    input{
+                        padding-bottom: 3px;
+                    }
+                }
+                border-bottom: #555555 solid 1px;
+            }
+        }
+        .button {
+            border-radius: 2px;
+            border :rgb(67, 151, 177) solid 1px;
+            width: 90%;
+            margin : 0 auto;
+            text-align: center;
+            display : block;
+            transition: 0.3s;
+            background-color: @_module_buttoncolor;
+            outline: none;
+            margin-top: 100px;
+        }
+        .button:hover {
+            border-radius: 2px;
+            border :rgb(14, 114, 145) solid 1px;
+            width: 100%;
+            margin : 0 auto;
+            text-align: center;
+            display : block;
+            transition: 0.3s;
+            background-color: @_module_buttoncolorhover;
+            outline: none;
+            margin-top: 100px;
+        }
+    }
+
+}
